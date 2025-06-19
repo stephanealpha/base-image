@@ -164,7 +164,8 @@ function provisioning_download() {
     fi
     if [[ -n $auth_token ]];then
         printf "lancement du wget pour $2 $1 avec token"
-        wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        #wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
          echo $?
     else
          printf "lancement du wget pour $2 $1 sans token"
