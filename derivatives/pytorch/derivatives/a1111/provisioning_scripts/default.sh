@@ -43,7 +43,9 @@ function provisioning_start() {
     provisioning_get_apt_packages
     provisioning_get_extensions
     provisioning_get_pip_packages
-    sleep 30
+    printf "Pause d'une minute pour chargements"
+    sleep 60
+    printf "Reprise"
     provisioning_get_files \
         "${A1111_DIR}/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
@@ -156,6 +158,7 @@ function provisioning_download() {
     if [[ -n $auth_token ]];then
         printf "lancement du wget pour $2 $1 avec token"
         wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+         echo $?
     else
          printf "lancement du wget pour $2 $1 sans token"
         wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
