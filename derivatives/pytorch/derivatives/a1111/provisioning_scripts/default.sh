@@ -43,6 +43,7 @@ function provisioning_start() {
     provisioning_get_apt_packages
     provisioning_get_extensions
     provisioning_get_pip_packages
+    sleep 30
     provisioning_get_files \
         "${A1111_DIR}/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
@@ -96,10 +97,9 @@ function provisioning_get_files() {
     mkdir -p "$dir"
     shift
     arr=("$@")
-    printf ${#arr[@]}
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
     for url in "${arr[@]}"; do
-        printf "Dans ma boucle Downloading: %s\n" "${url}"
+        printf "Downloading: %s\n" "${url}"
         provisioning_download "${url}" "${dir}"
         printf "\n"
     done
@@ -147,7 +147,6 @@ function provisioning_has_valid_civitai_token() {
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
-    printf "Voila le code API $CIVITAI_TOKEN"
     if [[ -n $HF_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
         auth_token="$HF_TOKEN"
     elif 
@@ -156,7 +155,7 @@ function provisioning_download() {
     fi
     if [[ -n $auth_token ]];then
         printf "lancement du wget pour $2 $1 avec token"
-        wget --header="Authorization: Bearer $auth_token" -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     else
          printf "lancement du wget pour $2 $1 sans token"
         wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
