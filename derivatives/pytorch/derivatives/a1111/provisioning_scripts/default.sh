@@ -16,20 +16,20 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # ralvis original
-    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
     # ponyXL
-    "https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16?token=$CIVITAI_TOKEN"
-    "https://civitai.com/api/download/models/1838857?token=$CIVITAI_TOKEN"
-    "https://civitai.com/api/download/models/1899516?token=$CIVITAI_TOKEN"
-    "https://civitai.com/api/download/models/1906687?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/1838857"
+    "https://civitai.com/api/download/models/1899516"
+    "https://civitai.com/api/download/models/1906687"
 )
 
 UNET_MODELS=(
 )
 
 LORA_MODELS=(
-    "https://civitai.com/api/download/models/717403?type=Model&format=SafeTensor?token=$CIVITAI_TOKEN"
-    "https://civitai.com/api/download/models/447292?type=Model&format=SafeTensor?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/717403?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/447292?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -164,8 +164,8 @@ function provisioning_download() {
     fi
     if [[ -n $auth_token ]];then
         printf "lancement du wget pour $2 $1 avec token"
-        #wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-        wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
          echo $?
     else
          printf "lancement du wget pour $2 $1 sans token"
