@@ -93,9 +93,10 @@ function provisioning_get_files() {
     mkdir -p "$dir"
     shift
     arr=("$@")
+    printf ${#arr[@]}
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
     for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
+        printf "Dans ma boucle Downloading: %s\n" "${url}"
         provisioning_download "${url}" "${dir}"
         printf "\n"
     done
