@@ -15,9 +15,9 @@ PIP_PACKAGES=(
 )
 
 CHECKPOINT_MODELS=(
-    "https://civitai.com/api/download/models/798204"
-    "https://civitai.com/api/download/models/1838857"
-    "https://civitai.com/api/download/models/1899516"
+    "https://civitai.com/api/download/models/798204" \
+    "https://civitai.com/api/download/models/1838857" \
+    "https://civitai.com/api/download/models/1899516" \
     "https://civitai.com/api/download/models/1906687"
 )
 
