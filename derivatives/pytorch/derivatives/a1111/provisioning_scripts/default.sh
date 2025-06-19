@@ -15,16 +15,21 @@ PIP_PACKAGES=(
 )
 
 CHECKPOINT_MODELS=(
-    "https://civitai.com/api/download/models/798204"
-    "https://civitai.com/api/download/models/1838857"
-    "https://civitai.com/api/download/models/1899516" 
-    "https://civitai.com/api/download/models/1906687"
+    # ralvis original
+    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
+    # ponyXL
+    "https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
+    #"https://civitai.com/api/download/models/1838857"
+    #"https://civitai.com/api/download/models/1899516" 
+    #"https://civitai.com/api/download/models/1906687"
 )
 
 UNET_MODELS=(
 )
 
 LORA_MODELS=(
+    "https://civitai.com/api/download/models/717403?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/447292?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
