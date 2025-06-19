@@ -16,20 +16,20 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # ralvis original
-    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16?token=APISA"
+    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16?token=$CIVITAI_TOKEN"
     # ponyXL
-    "https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16?token=APISA"
-    "https://civitai.com/api/download/models/1838857?token=APISA"
-    "https://civitai.com/api/download/models/1899516?token=APISA"
-    "https://civitai.com/api/download/models/1906687?token=APISA"
+    "https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/1838857?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/1899516?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/1906687?token=$CIVITAI_TOKEN"
 )
 
 UNET_MODELS=(
 )
 
 LORA_MODELS=(
-    "https://civitai.com/api/download/models/717403?type=Model&format=SafeTensor?token=APISA"
-    "https://civitai.com/api/download/models/447292?type=Model&format=SafeTensor?token=APISA"
+    "https://civitai.com/api/download/models/717403?type=Model&format=SafeTensor?token=$CIVITAI_TOKEN"
+    "https://civitai.com/api/download/models/447292?type=Model&format=SafeTensor?token=$CIVITAI_TOKEN"
 )
 
 VAE_MODELS=(
