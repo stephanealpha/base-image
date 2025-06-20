@@ -34,8 +34,9 @@ LORA_MODELS=(
     "HangingBreasts.safetensors;https://civitai.com/api/download/models/1105878?type=Model&format=SafeTensor"
     "BetterBodies.safetensors;https://civitai.com/api/download/models/1089807?type=Model&format=SafeTensor"
     "Mooning.safetensors;https://civitai.com/api/download/models/209934?type=Model&format=SafeTensor"
-    
-)
+    "EpicPussy.safetensors;https://civitai.com/api/download/models/178520?type=Model&format=SafeTensor"
+    "NaturalBlond.safetensors;https://civitai.com/api/download/models/265125?type=Model&format=SafeTensor"
+    "BendOver.safetensors;https://civitai.com/api/download/models/147858?type=Model&format=SafeTensor"
 
 VAE_MODELS=(
 )
