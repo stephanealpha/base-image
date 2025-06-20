@@ -16,20 +16,20 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # ralvis original
-    "realvisXL.safetensors";"https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "realvisXL.safetensors;https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
     # ponyXL
-    "ponyXL.safetensors";"https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "cyberRealisticPony.safetensors";"https://civitai.com/api/download/models/1838857"
-    "cyberRealisticPonyCatalyst.safetensors";"https://civitai.com/api/download/models/1899516"
-    "realvisXL.safetensors";"https://civitai.com/api/download/models/1906687"
+    "ponyXL.safetensors;https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "cyberRealisticPony.safetensors;https://civitai.com/api/download/models/1838857"
+    "cyberRealisticPonyCatalyst.safetensors;https://civitai.com/api/download/models/1899516"
+    "realvisXL.safetensors;https://civitai.com/api/download/models/1906687"
 )
 
 UNET_MODELS=(
 )
 
 LORA_MODELS=(
-    "zyAmateurStyle.safetensors";"https://civitai.com/api/download/models/717403"
-    "Moana.safetensors";"https://civitai.com/api/download/models/447292"
+    "zyAmateurStyle.safetensors;https://civitai.com/api/download/models/717403"
+    "Moana.safetensors;https://civitai.com/api/download/models/447292"
 )
 
 VAE_MODELS=(
