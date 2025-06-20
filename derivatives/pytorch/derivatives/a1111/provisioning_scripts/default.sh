@@ -170,10 +170,11 @@ function provisioning_download() {
          printf "lancement du wget pour $nom avec token"
         curl -H "Authorization: Bearer $auth_token" "$fichier" -o "$1/$nom"
         #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-         echo $?
     else
-         printf "lancement du wget pour $2 $1 sans token"
-        wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        fichier = $(echo $2 | cut -d ',' -f 2)
+        nom = $(echo $2 | cut -d ',' -f 1)
+         printf "lancement du wget pour $nom sans token"
+        curl "$fichier" -o "$1/$nom"
         echo $?
     fi
 }
