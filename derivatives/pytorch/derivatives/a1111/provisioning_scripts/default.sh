@@ -101,15 +101,16 @@ function provisioning_get_extensions() {
 
 function provisioning_get_files() {
     if [[ -z $2 ]]; then return 1; fi
-    
     dir="$1"
     mkdir -p "$dir"
     shift
     arr=("$@")
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
     for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
+            fichier=$(echo ${url} | cut -d ';' -f 2)
+            nom=$(echo ${url} | cut -d ';' -f 1)
+        printf "Downloading: %s\n" "${nom}"
+        provisioning_download "${fichier}" "${dir}" "${nom}"
         printf "\n"
     done
 }
@@ -154,26 +155,26 @@ function provisioning_has_valid_civitai_token() {
     fi
 }
 
-# Download from $1 URL to $2 file path
+# Download from $2 URL to $1 file path
 function provisioning_download() {
-    fichier=$(echo $2 | cut -d ';' -f 2)
-    nom=$(echo $2 | cut -d ';' -f 1)
-    if [[ -n $HF_TOKEN && $fichier =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
+    printf "URL to get=$1\n"
+    printf "Path to use=$2\n"
+    printf "File to write=$3\n"
+    if [[ -n $HF_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
         auth_token="$HF_TOKEN"
     elif 
-        [[ -n $CIVITAI_TOKEN && $fichier =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
+        [[ -n $CIVITAI_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
         auth_token="$CIVITAI_TOKEN"
     fi
     if [[ -n $auth_token ]];then
         #printf "lancement du wget pour $2 $1 avec token"
         # wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-        printf "lancement du CURL pour $nom avec token"
-        curl -H "Authorization: Bearer $auth_token" "$fichier" -o "$1/$nom"
+        #printf "lancement du CURL pour $nom avec token"
+        curl -L-H "Authorization: Bearer $auth_token" "$1" -o "$2/$3"
         #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     else
-        printf "lancement du CURL pour $nom sans token"
-        curl "$fichier" -o "$1/$nom"
-        echo $?
+        #printf "lancement du CURL pour $nom sans token"
+       curl -L "$1" -o "$2/$3"
     fi
 }
 
