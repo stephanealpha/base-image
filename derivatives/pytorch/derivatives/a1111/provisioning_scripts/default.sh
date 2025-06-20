@@ -29,7 +29,7 @@ UNET_MODELS=(
 
 LORA_MODELS=(
     "zyAmateurStyle.safetensors";"https://civitai.com/api/download/models/717403"
-    "https://civitai.com/api/download/models/447292"
+    "Moana.safetensors";"https://civitai.com/api/download/models/447292"
 )
 
 VAE_MODELS=(
@@ -164,7 +164,11 @@ function provisioning_download() {
     fi
     if [[ -n $auth_token ]];then
         printf "lancement du wget pour $2 $1 avec token"
-        wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        # wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+        fichier = $(echo $2 | cut -d ',' -f 2)
+        nom = $(echo $2 | cut -d ',' -f 1)
+         printf "lancement du wget pour $nom avec token"
+        curl -H "Authorization: Bearer $auth_token" "$fichier" -o "$1/$nom"
         #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
          echo $?
     else
