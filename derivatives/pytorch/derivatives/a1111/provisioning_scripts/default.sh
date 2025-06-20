@@ -30,6 +30,11 @@ UNET_MODELS=(
 LORA_MODELS=(
     "zyAmateurStyle.safetensors;https://civitai.com/api/download/models/717403"
     "Moana.safetensors;https://civitai.com/api/download/models/447292"
+    "PokingNipples.safetensors;https://civitai.com/api/download/models/203711?type=Model&format=SafeTensor"
+    "HangingBreasts.safetensors;https://civitai.com/api/download/models/1105878?type=Model&format=SafeTensor"
+    "BetterBodies.safetensors;https://civitai.com/api/download/models/1089807?type=Model&format=SafeTensor"
+    "Mooning.safetensors;https://civitai.com/api/download/models/209934?type=Model&format=SafeTensor"
+    
 )
 
 VAE_MODELS=(
