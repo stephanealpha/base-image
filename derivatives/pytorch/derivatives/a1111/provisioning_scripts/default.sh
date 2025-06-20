@@ -156,24 +156,22 @@ function provisioning_has_valid_civitai_token() {
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
-    if [[ -n $HF_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
+    fichier=$(echo $2 | cut -d ';' -f 2)
+    nom=$(echo $2 | cut -d ';' -f 1)
+    if [[ -n $HF_TOKEN && $fichier =~ ^https://([a-zA-Z0-9_-]+\.)?huggingface\.co(/|$|\?) ]]; then
         auth_token="$HF_TOKEN"
     elif 
-        [[ -n $CIVITAI_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
+        [[ -n $CIVITAI_TOKEN && $fichier =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
         auth_token="$CIVITAI_TOKEN"
     fi
     if [[ -n $auth_token ]];then
-        printf "lancement du wget pour $2 $1 avec token"
+        #printf "lancement du wget pour $2 $1 avec token"
         # wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-        fichier = $(echo $2 | cut -d ';' -f 2)
-        nom = $(echo $2 | cut -d ';' -f 1)
-         printf "lancement du wget pour $nom avec token"
+        printf "lancement du CURL pour $nom avec token"
         curl -H "Authorization: Bearer $auth_token" "$fichier" -o "$1/$nom"
         #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     else
-        fichier = $(echo $2 | cut -d ';' -f 2)
-        nom = $(echo $2 | cut -d ';' -f 1)
-         printf "lancement du wget pour $nom sans token"
+        printf "lancement du CURL pour $nom sans token"
         curl "$fichier" -o "$1/$nom"
         echo $?
     fi
