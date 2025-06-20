@@ -171,7 +171,7 @@ function provisioning_download() {
         # wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
         #printf "lancement du CURL pour $nom avec token"
         #curl -L -H "Authorization: Bearer $auth_token" "$1" -o "$2/$3"
-        curl  -H "Authorization: Bearer $auth_token" "$1" -o "$2/$3"
+        curl  -H "Authorization: Bearer $auth_token" -L "$1" -o "$2/$3"
         #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     else
         #printf "lancement du CURL pour $nom sans token"
