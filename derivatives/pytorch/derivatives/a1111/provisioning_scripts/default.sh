@@ -25,6 +25,7 @@ CHECKPOINT_MODELS=(
 )
 
 UNET_MODELS=(
+
 )
 
 LORA_MODELS=(
@@ -38,13 +39,18 @@ LORA_MODELS=(
     "NaturalBlond.safetensors;https://civitai.com/api/download/models/265125?type=Model&format=SafeTensor"
     "BendOver.safetensors;https://civitai.com/api/download/models/147858?type=Model&format=SafeTensor"
 
+)
+
 VAE_MODELS=(
+
 )
 
 ESRGAN_MODELS=(
+
 )
 
 CONTROLNET_MODELS=(
+
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
