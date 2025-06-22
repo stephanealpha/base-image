@@ -18,10 +18,10 @@ CHECKPOINT_MODELS=(
     # ralvis original
     "realvisXL.safetensors;https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
     # ponyXL
-    "ponyXL.safetensors;https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
+    #"ponyXL.safetensors;https://civitai.com/api/download/models/1763661?type=Model&format=SafeTensor&size=full&fp=fp16"
     "cyberRealisticPony.safetensors;https://civitai.com/api/download/models/1838857"
-    "cyberRealisticPonyCatalyst.safetensors;https://civitai.com/api/download/models/1899516"
-    "realvisXL.safetensors;https://civitai.com/api/download/models/1906687"
+    #"cyberRealisticPonyCatalyst.safetensors;https://civitai.com/api/download/models/1899516"
+    #"realvisXL.safetensors;https://civitai.com/api/download/models/1906687"
 )
 
 UNET_MODELS=(
