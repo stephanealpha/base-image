@@ -38,11 +38,11 @@ LORA_MODELS=(
     # BetterHands
     "BetterHands.safetensors;https://civitai.com/api/download/models/1901141?type=Model&format=SafeTensor"
     # Subtle Lighting
-    "SubtelLighting.safetensors;https://civitai.com/api/download/models/1928365?type=Model&format=SafeTensor"
+    #"SubtelLighting.safetensors;https://civitai.com/api/download/models/1928365?type=Model&format=SafeTensor"
     # StripSequence
-    "StripSequence.safetensors;https://civitai.com/api/download/models/1868856?type=Model&format=SafeTensor"
+    #"StripSequence.safetensors;https://civitai.com/api/download/models/1868856?type=Model&format=SafeTensor"
     # HandInPanty
-    "HandinPanty.safetensors;https://civitai.com/api/download/models/1629430?type=Model&format=SafeTensor"
+    #"HandinPanty.safetensors;https://civitai.com/api/download/models/1629430?type=Model&format=SafeTensor"
     # Better Pussy
     "BetterPussy.safetensors;https://civitai.com/api/download/models/1838885?type=Model&format=SafeTensor"
     # Toucheofrealisms
