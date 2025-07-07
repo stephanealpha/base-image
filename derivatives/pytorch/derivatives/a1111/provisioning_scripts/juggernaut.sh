@@ -21,7 +21,8 @@ CHECKPOINT_MODELS=(
     "JuggernautXL.safetensors;https://civitai.com/api/download/models/1759168?type=Model&format=SafeTensor&size=full&fp=fp16"
     # Babes By Stable Yogi
     "BabesYogi.safetensors;https://civitai.com/api/download/models/1075493?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    
+    # Realism by stable yogi
+    "RealismYogi.safetensors;https://civitai.com/api/download/models/1075460?type=Model&format=SafeTensor&size=pruned&fp=fp16"
 )
 
 UNET_MODELS=(
