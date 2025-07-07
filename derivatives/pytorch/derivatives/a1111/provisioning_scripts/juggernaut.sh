@@ -68,9 +68,9 @@ function provisioning_start() {
     provisioning_get_apt_packages
     provisioning_get_extensions
     provisioning_get_pip_packages
-    printf "Pause d'une minute pour chargements"
-    sleep 60
-    printf "Reprise"
+    #printf "Pause d'une minute pour chargements"
+    #sleep 60
+    #printf "Reprise"
     provisioning_get_files \
         "${A1111_DIR}/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
