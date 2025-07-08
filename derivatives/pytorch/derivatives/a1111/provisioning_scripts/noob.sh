@@ -17,10 +17,8 @@ PIP_PACKAGES=(
 )
 
 CHECKPOINT_MODELS=(
-    # JuggernautXL
-    "JuggernautXL.safetensors;https://civitai.com/api/download/models/1759168?type=Model&format=SafeTensor&size=full&fp=fp16"
-    # Babes By Stable Yogi
-    "BabesYogi.safetensors;https://civitai.com/api/download/models/1075493?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    # NoobAI
+    "NoobAI.safetensors;https://civitai.com/api/download/models/1190596?type=Model&format=SafeTensor&size=full&fp=bf16"
 )
 
 UNET_MODELS=(
@@ -29,13 +27,13 @@ UNET_MODELS=(
 
 LORA_MODELS=(
     # AmateurTriggerXL
-    "AmateurTriggerXL.safetensors;https://civitai.com/api/download/models/1835441?type=Model&format=SafeTensor"
+    #"AmateurTriggerXL.safetensors;https://civitai.com/api/download/models/1835441?type=Model&format=SafeTensor"
     # Puffies
-    "Puffies.safetensors;https://civitai.com/api/download/models/1876756?type=Model&format=SafeTensor"
+    #"Puffies.safetensors;https://civitai.com/api/download/models/1876756?type=Model&format=SafeTensor"
     # SimpsPussy
-    "SimpsPussy.safetensors;https://civitai.com/api/download/models/1841736?type=Model&format=SafeTensor"
+    #"SimpsPussy.safetensors;https://civitai.com/api/download/models/1841736?type=Model&format=SafeTensor"
     # BetterHands
-    "BetterHands.safetensors;https://civitai.com/api/download/models/1901141?type=Model&format=SafeTensor"
+    #"BetterHands.safetensors;https://civitai.com/api/download/models/1901141?type=Model&format=SafeTensor"
     # Subtle Lighting
     #"SubtelLighting.safetensors;https://civitai.com/api/download/models/1928365?type=Model&format=SafeTensor"
     # StripSequence
@@ -43,9 +41,9 @@ LORA_MODELS=(
     # HandInPanty
     #"HandinPanty.safetensors;https://civitai.com/api/download/models/1629430?type=Model&format=SafeTensor"
     # Better Pussy
-    "BetterPussy.safetensors;https://civitai.com/api/download/models/1838885?type=Model&format=SafeTensor"
+    #"BetterPussy.safetensors;https://civitai.com/api/download/models/1838885?type=Model&format=SafeTensor"
     # Toucheofrealisms
-    "TouchofRealismV2.safetensors;https://civitai.com/api/download/models/1934796?type=Model&format=SafeTensor"
+    #"TouchofRealismV2.safetensors;https://civitai.com/api/download/models/1934796?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
@@ -67,9 +65,6 @@ function provisioning_start() {
     provisioning_get_apt_packages
     provisioning_get_extensions
     provisioning_get_pip_packages
-    #printf "Pause d'une minute pour chargements"
-    #sleep 60
-    #printf "Reprise"
     provisioning_get_files \
         "${A1111_DIR}/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
