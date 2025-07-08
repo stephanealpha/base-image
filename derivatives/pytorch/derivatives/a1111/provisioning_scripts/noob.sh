@@ -18,7 +18,7 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # NoobAI
-    "NoobAI.safetensors;https://civitai.com/api/download/models/1190596?type=Model&format=SafeTensor&size=full&fp=bf16"
+    "NoobAI.safetensors;https://civitai.com/api/download/models/1190596"
 )
 
 UNET_MODELS=(
