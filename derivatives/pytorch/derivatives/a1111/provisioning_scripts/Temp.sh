@@ -17,8 +17,8 @@ PIP_PACKAGES=(
 )
 
 CHECKPOINT_MODELS=(
-    # Afrodite
-    "Afrodite.safetensors;https://civitai.com/api/download/models/450105?type=Model&format=SafeTensor&size=full&fp=fp16"
+    # BigAsp
+    "BigAsp.safetensors;https://civitai.com/api/download/models/991916?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 UNET_MODELS=(
