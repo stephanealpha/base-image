@@ -18,7 +18,8 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # BigAsp
-    "BigAsp.safetensors;https://civitai.com/api/download/models/991916?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "bigasp.safetensors;https://civitai.com/api/download/models/991916?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    #"BigAsp.safetensors;https://civitai.com/api/download/models/991916?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 UNET_MODELS=(
