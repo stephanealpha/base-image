@@ -60,8 +60,14 @@ CONTROLNET_MODELS=(
 
 )
 
-GIT_PACKAGES=(
-
+EXTENSIONS=(
+    # Stable-Diffusion-Webui-Civitai-Helper
+    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper.git"
+    # https://github.com/Avaray/lora-keywords-finder
+    "https://github.com/Avaray/lora-keywords-finder.git"
+    https://github.com/aigc-apps/sd-webui-EasyPhoto.git
+    # sd-webui-EasyPhoto
+    "https://github.com/Avaray/sd-webui-EasyPhoto.git"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
