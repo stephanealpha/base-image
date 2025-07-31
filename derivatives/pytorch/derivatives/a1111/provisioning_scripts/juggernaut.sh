@@ -60,6 +60,10 @@ CONTROLNET_MODELS=(
 
 )
 
+GIT_PACKAGES=(
+
+)
+
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
