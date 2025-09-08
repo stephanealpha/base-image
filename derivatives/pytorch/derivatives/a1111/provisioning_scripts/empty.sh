@@ -17,7 +17,8 @@ PIP_PACKAGES=(
 )
 
 CHECKPOINT_MODELS=(
-    
+    # JuggernautXL
+    "JuggernautXL.safetensors;https://civitai.com/api/download/models/1759168?type=Model&format=SafeTensor&size=full&fp=fp16"   
 )
 
 UNET_MODELS=(
