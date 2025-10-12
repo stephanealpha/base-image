@@ -6,26 +6,23 @@ set -eou pipefail
 # Allow user to fetch alternative repo, branch, tag, commit
 export APP_REPO_URL=${APP_REPO_URL:-https://github.com/cocktailpeanut/fluxgym}
 export APP_REF=${APP_REF:-main}
+export INSTALL_DIR="${WORKSPACE}/$(basename $APP_REPO_URL)"
 
 # Install the software into the default venv
 . /venv/main/bin/activate
-cd "${DATA_DIRECTORY}"
+conda install -y python=3.10
+cd "${WORKSPACE}"
 
-git clone "$APP_REPO_URL"
-cd $(basename "$APP_REPO_URL")
-git checkout "$APP_REF"
+[[ ! -d "$INSTALL_DIR" ]] && git clone "$APP_REPO_URL"
+(cd "$INSTALL_DIR" && git checkout "$APP_REF")
 
 # Kohya Scripts requirements
-git clone -b sd3 https://github.com/kohya-ss/sd-scripts
-cd sd-scripts
-pip install -r requirements.txt
+[[ ! -d "${INSTALL_DIR}/sd-scripts" ]] && git clone -b sd3 https://github.com/kohya-ss/sd-scripts "${INSTALL_DIR}/sd-scripts"
+(cd "${INSTALL_DIR}/sd-scripts" && uv pip install -r requirements.txt)
 
 # Flux Gym requirements
-cd ..
-pip install -r requirements.txt
-pip install -U bitsandbytes
-
-
+(cd "${INSTALL_DIR}" && uv pip install torch torchvision torchaudio bitsandbytes -r requirements.txt --torch-backend=auto)
+uv pip install transformers==4.49.0
 # Generate the launch script for supervisord
 cat > /opt/supervisor-scripts/fluxgym.sh << 'EOL'
 #!/bin/bash
