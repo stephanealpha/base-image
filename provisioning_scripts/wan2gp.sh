@@ -4,16 +4,21 @@ set -euo pipefail
 
 . /venv/main/bin/activate
 
+apt-get install -y \
+    libasound2-dev \
+    pulseaudio-utils \
+    --no-install-recommends
+
 cd "$WORKSPACE"
-[[ -d "${WORKSPACE}/ACE-Step" ]] || git clone https://github.com/ace-step/ACE-Step
-cd ACE-Step
-[[ -n "${ACE_STEP_VERSION:-}" ]] && git checkout "$ACE_STEP_VERSION"
+[[ -d "${WORKSPACE}/Wan2GP" ]] || git clone https://github.com/deepbeepmeep/Wan2GP
+cd Wan2GP
+[[ -n "{WAN2GP_VERSION:-}" ]] && git checkout "$WAN2GP_VERSION"
 
-uv pip install -r requirements.txt --torch-backend=auto
-uv pip install -e .
+uv pip install torch==${TORCH_VERSION:-2.8.0} torchvision torchaudio --torch-backend=auto
+uv pip install -r requirements.txt
 
-# Create ACE Step startup script
-cat > /opt/supervisor-scripts/ace-step.sh << 'EOL'
+# Create Wan2GP startup scripts
+cat > /opt/supervisor-scripts/wan2gp.sh << 'EOL'
 #!/bin/bash
 
 utils=/opt/supervisor-scripts/utils
@@ -21,23 +26,27 @@ utils=/opt/supervisor-scripts/utils
 . "${utils}/cleanup_generic.sh"
 . "${utils}/environment.sh"
 . "${utils}/exit_serverless.sh"
-. "${utils}/exit_portal.sh" "ace step"
+. "${utils}/exit_portal.sh" "Wan2GP"
 
-echo "Starting Ace Step"
+echo "Starting Wan2GP"
+
+. /etc/environment
 . /venv/main/bin/activate
 
-cd "${WORKSPACE}/ACE-Step"
-acestep ${ACE_STEP_ARGS:---port 7865 --torch_compile true --bf16 true} 2>&1
+cd "${WORKSPACE}/Wan2GP"
+export XDG_RUNTIME_DIR=/tmp
+export SDL_AUDIODRIVER=dummy
+python wgp.py 2>&1
 
 EOL
 
-chmod +x /opt/supervisor-scripts/ace-step.sh
+chmod +x /opt/supervisor-scripts/wan2gp.sh
 
 # Generate the supervisor config files
-cat > /etc/supervisor/conf.d/ace-step.conf << 'EOL'
-[program:ace-step]
+cat > /etc/supervisor/conf.d/wan2gp.conf << 'EOL'
+[program:wan2gp]
 environment=PROC_NAME="%(program_name)s"
-command=/opt/supervisor-scripts/ace-step.sh
+command=/opt/supervisor-scripts/wan2gp.sh
 autostart=true
 autorestart=true
 exitcodes=0
