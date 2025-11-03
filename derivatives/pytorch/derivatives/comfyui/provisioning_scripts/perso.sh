@@ -15,9 +15,9 @@ PIP_PACKAGES=(
 DIFFUSION_MODELS=(
 	#########################    WAN IMAGE TO VIDEO
     # wan2.2_i2v_high_noise_14B_fp8_scaled
-    #"wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_i2v_low_noise_14B_fp8_scaled
-    #"wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
     #########################    WAN TEXT TO VIDEO
     # wan2.2_t2v_high_noise_14B_fp8_scaled
     "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors"
@@ -33,9 +33,9 @@ TEXTENC_MODELS=(
 LORA_MODELS=(
 	#########################    WAN IMAGE TO VIDEO
     # wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise
-    #"wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
+    "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
     # wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise
-    #"wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+    "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
     #########################    WAN TEXT TO VIDEO
     # wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise
     "wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
@@ -189,16 +189,16 @@ function provisioning_download() {
         [[ -n $CIVITAI_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
         auth_token="$CIVITAI_TOKEN"
     fi
-    if [[ -n $auth_token ]];then
-        #printf "lancement du wget pour $2 $1 avec token"
-        # wget --header="Authorization: Bearer $auth_token" -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
-        #printf "lancement du CURL pour $nom avec token"
-        #curl -L -H "Authorization: Bearer $auth_token" "$1" -o "$2/$3"
-        curl  -H "Authorization: Bearer $auth_token" -L "$1" -o "$2/$3"
-        #wget -nc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+    if [ ! -f $2:$3 ]; then 
+        if [[ -n $auth_token ]];then
+            printf "lancement du CURL pour $3 avec token"
+            curl  -H "Authorization: Bearer $auth_token" -L "$1" -o "$2/$3"
+           else
+            printf "lancement du CURL pour $3 sans token"
+            curl -L "$1" -o "$2/$3"
+        fi
     else
-        #printf "lancement du CURL pour $nom sans token"
-       curl -L "$1" -o "$2/$3"
+        printf "fichier $3 deja present"
     fi
 }
 
