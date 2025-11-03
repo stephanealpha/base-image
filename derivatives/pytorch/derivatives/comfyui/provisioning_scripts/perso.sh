@@ -189,7 +189,7 @@ function provisioning_download() {
         [[ -n $CIVITAI_TOKEN && $1 =~ ^https://([a-zA-Z0-9_-]+\.)?civitai\.com(/|$|\?) ]]; then
         auth_token="$CIVITAI_TOKEN"
     fi
-    if [ ! -f $2:$3 ]; then 
+    if [ ! -f $2/$3 ]; then 
         if [[ -n $auth_token ]];then
             printf "lancement du CURL pour $3 avec token"
             curl  -H "Authorization: Bearer $auth_token" -L "$1" -o "$2/$3"
