@@ -3,28 +3,39 @@
 # Provisioning should not complete if there is an error. Retry on reboot if it failed
 set -euo pipefail
 
+# Ensure downloaded models are in the workspace
+HF_HOME="${HF_HOME:-${DATA_DIRECTORY}/huggingface}"
+
 # Allow user to fetch alternative repo, branch, tag, commit
-export APP_REPO_URL=${APP_REPO_URL:-https://github.com/cocktailpeanut/fluxgym}
-export APP_REF=${APP_REF:-main}
-export INSTALL_DIR="${WORKSPACE}/$(basename $APP_REPO_URL)"
+APP_REPO_URL=${APP_REPO_URL:-https://github.com/nari-labs/dia}
+APP_DIR="${WORKSPACE}/$(basename $APP_REPO_URL)"
+APP_REF=${APP_REF:-main}
+TORCH_VERSION=${TORCH_VERSION:-2.8.0}
 
 # Install the software into the default venv
 . /venv/main/bin/activate
-conda install -y python=3.10
-cd "${WORKSPACE}"
 
-[[ ! -d "$INSTALL_DIR" ]] && git clone "$APP_REPO_URL"
-(cd "$INSTALL_DIR" && git checkout "$APP_REF")
+[[ -d "$APP_DIR" ]] || git clone "$APP_REPO_URL" "$APP_DIR"
 
-# Kohya Scripts requirements
-[[ ! -d "${INSTALL_DIR}/sd-scripts" ]] && git clone -b sd3 https://github.com/kohya-ss/sd-scripts "${INSTALL_DIR}/sd-scripts"
-(cd "${INSTALL_DIR}/sd-scripts" && uv pip install -r requirements.txt)
+cd "$APP_DIR"
+git checkout "$APP_REF"
 
-# Flux Gym requirements
-(cd "${INSTALL_DIR}" && uv pip install torch torchvision torchaudio bitsandbytes -r requirements.txt peft'<0.18' --torch-backend auto)
-uv pip install transformers==4.49.0
+sed -i \
+  -e '/^\s*"torch==/d' \
+  -e '/^\s*"torchaudio==/d' \
+  -e '/^\s*"triton/d' \
+  -e '/^\[tool\.uv\.sources\]/,+7d' \
+  -e '/^\[\[tool\.uv\.index\]\]/,+4d' \
+  pyproject.toml
+
+uv pip install torch==${TORCH_VERSION} torchaudio --torch-backend auto
+
+uv pip install -e .
+
+git reset --hard
+
 # Generate the launch script for supervisord
-cat > /opt/supervisor-scripts/fluxgym.sh << 'EOL'
+cat > /opt/supervisor-scripts/dia.sh << 'EOL'
 #!/bin/bash
 
 # User can configure startup by removing the reference in /etc/portal.yaml - So wait for that file and check it
@@ -33,8 +44,8 @@ while [ ! -f "$(realpath -q /etc/portal.yaml 2>/dev/null)" ]; do
     sleep 1
 done
 
-# Check for Flux in the portal config
-search_term="Flux"
+# Check for Dia in the portal config
+search_term="Dia"
 search_pattern=$(echo "$search_term" | sed 's/[ _-]/[ _-]/g')
 if ! grep -qiE "^[^#].*${search_pattern}" /etc/portal.yaml; then
     echo "Skipping startup for ${PROC_NAME} (not in /etc/portal.yaml)" | tee -a "/var/log/portal/${PROC_NAME}.log"
@@ -51,19 +62,24 @@ while [ -f "/.provisioning" ]; do
     sleep 10
 done
 
-cd ${DATA_DIRECTORY}/fluxgym
+cd ${DATA_DIRECTORY}/dia
+export HF_HOME="${DATA_DIRECTORY}/huggingface"
+export GRADIO_SERVER_NAME=${GRADIO_SERVER_NAME:-127.0.0.1}
+export GRADIO_SERVER_PORT=${GRADIO_SERVER_PORT:-17860}
 
-GRADIO_SERVER_PORT=17860 python app.py 2>&1 | tee -a "/var/log/portal/${PROC_NAME}.log"
+echo "Starting Nari-Labs Dia application.  UI will be available when the models have been fetched and loaded." | tee -a "/var/log/portal/${PROC_NAME}.log"
+
+python app.py 2>&1 | tee -a "/var/log/portal/${PROC_NAME}.log"
 
 EOL
 
-chmod +x /opt/supervisor-scripts/fluxgym.sh
+chmod +x /opt/supervisor-scripts/dia.sh
 
 # Generate the supervisor config file
-cat > /etc/supervisor/conf.d/fluxgym.conf << 'EOL'
-[program:fluxgym]
+cat > /etc/supervisor/conf.d/dia.conf << 'EOL'
+[program:dia]
 environment=PROC_NAME="%(program_name)s"
-command=/opt/supervisor-scripts/fluxgym.sh
+command=/opt/supervisor-scripts/dia.sh
 autostart=true
 autorestart=true
 exitcodes=0
