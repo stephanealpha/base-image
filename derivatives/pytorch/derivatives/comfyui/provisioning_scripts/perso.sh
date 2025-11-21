@@ -23,9 +23,13 @@ DIFFUSION_MODELS=(
     "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_t2v_low_noise_14B_fp8_scaled
     "wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors"
-    #########################    FLUX
+    #########################    FLUX KREA
+	# FP8
     # flux1-krea-dev_fp8_scaled.safetensors
     "flux1-krea-dev_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
+	# COMPLET
+	# flux1-krea-dev.safetensors
+	"flux1-krea-dev;https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 )
 
 TEXTENC_MODELS=(
