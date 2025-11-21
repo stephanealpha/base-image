@@ -75,7 +75,7 @@ CONTROLNET_MODELS=(
 )
 
 EXTENSIONS=(
-
+	https://github.com/MoonGoblinDev/Civicomfy.git
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
@@ -130,8 +130,8 @@ function provisioning_get_pip_packages() {
 
 function provisioning_get_extensions() {
     for repo in "${EXTENSIONS[@]}"; do
-        dir="${repo##*/}"
-        path="${A1111_DIR}/extensions/${dir}"
+        #dir="${repo##*/}"
+        path="${COMFYUI_DIR}/custom_nodes/"
         if [[ ! -d $path ]]; then
             printf "Downloading extension: %s...\n" "${repo}"
             git clone "${repo}" "${path}" --recursive
