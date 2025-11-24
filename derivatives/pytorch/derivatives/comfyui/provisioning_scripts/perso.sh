@@ -33,6 +33,9 @@ DIFFUSION_MODELS=(
 	#########################    FLUX INPAINT
     # flux1-fill-dev.safetensors
 	"flux1-fill-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/split_files/diffusion_models/flux1-fill-dev.safetensors"
+	#########################    FLUX DEV
+	# flux1-dev.safetensors
+	"flux1-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors"
 )
 
 TEXTENC_MODELS=(
