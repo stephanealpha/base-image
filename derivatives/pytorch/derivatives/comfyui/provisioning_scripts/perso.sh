@@ -29,13 +29,13 @@ DIFFUSION_MODELS=(
     "flux1-krea-dev_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
 	# COMPLET
 	# flux1-krea-dev.safetensors
-	"flux1-krea-dev.safetensors;https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
+	#"flux1-krea-dev.safetensors;https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 	#########################    FLUX INPAINT
     # flux1-fill-dev.safetensors
 	"flux1-fill-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/split_files/diffusion_models/flux1-fill-dev.safetensors"
 	#########################    FLUX DEV
 	# flux1-dev.safetensors
-	"flux1-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors"
+	#"flux1-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors"
 )
 
 TEXTENC_MODELS=(
