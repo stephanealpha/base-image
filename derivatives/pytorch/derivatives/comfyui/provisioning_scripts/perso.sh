@@ -13,12 +13,12 @@ PIP_PACKAGES=(
 )
 
 DIFFUSION_MODELS=(
-	#########################    WAN IMAGE TO VIDEO
+	#########################    WAN 2.2 IMAGE TO VIDEO
     # wan2.2_i2v_high_noise_14B_fp8_scaled
     "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_i2v_low_noise_14B_fp8_scaled
     "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
-    #########################    WAN TEXT TO VIDEO
+    #########################    WAN 2.2 TEXT TO VIDEO
     # wan2.2_t2v_high_noise_14B_fp8_scaled
     "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_t2v_low_noise_14B_fp8_scaled
@@ -50,12 +50,12 @@ TEXTENC_MODELS=(
 )
 
 LORA_MODELS=(
-	#########################    WAN IMAGE TO VIDEO
+	#########################    WAN 2.2 IMAGE TO VIDEO
     # wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise
     "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
     # wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise
     "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
-    #########################    WAN TEXT TO VIDEO
+    #########################    WAN 2.2 TEXT TO VIDEO
     # wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise
     "wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
     # wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise
@@ -64,7 +64,7 @@ LORA_MODELS=(
     )
 
 VAE_MODELS=(
-    #########################    WAN
+    #########################    WAN 2.2
 	# wan_2.1_vae
 	"wan_2.1_vae.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
     #########################    FLUX
