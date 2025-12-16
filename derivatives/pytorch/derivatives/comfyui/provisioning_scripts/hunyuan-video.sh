@@ -13,14 +13,18 @@ PIP_PACKAGES=(
 )
 
 DIFFUSION_MODELS=(
+	###############################  IMG TO VIDEO HUNYUAN
 	# hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors
-  "hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/diffusion_models/hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors"
-  # hunyuanvideo1.5_720p_i2v_fp16.safetensors
-  "hunyuanvideo1.5_720p_i2v_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/diffusion_models/hunyuanvideo1.5_720p_i2v_fp16.safetensors"
+  	"hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/diffusion_models/hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors"
+  	# hunyuanvideo1.5_720p_i2v_fp16.safetensors
+  	"hunyuanvideo1.5_720p_i2v_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/diffusion_models/hunyuanvideo1.5_720p_i2v_fp16.safetensors"
+	###############################  TXT TO VIDEO HUNYUAN
+	# hunyuanvideo1.5_720p_t2v_fp16.safetensors
+	"hunyuanvideo1.5_720p_t2v_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/diffusion_models/hunyuanvideo1.5_720p_t2v_fp16.safetensors"
 )
 
 TEXTENC_MODELS=(
-    #########################    WAN
+    #########################    HUNYUAN
     # qwen_2.5_vl_7b_fp8_scaled.safetensors
     "qwen_2.5_vl_7b_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors"
     # byt5_small_glyphxl_fp16.safetensors
@@ -31,16 +35,19 @@ LORA_MODELS=(
     )
 
 VAE_MODELS=(
+	#########################    HUNYUAN
     # hunyuanvideo15_vae_fp16.safetensors
     "hunyuanvideo15_vae_fp16.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/vae/hunyuanvideo15_vae_fp16.safetensors"
 )
 
 CLIP_MODELS=(
+	#########################    HUNYUAN
     # sigclip_vision_patch14_384.safetensors
     "sigclip_vision_patch14_384.safetensors;https://huggingface.co/Comfy-Org/sigclip_vision_384/resolve/main/sigclip_vision_patch14_384.safetensors"
 )
 
 LATENT_MODELS=(
+	#########################    HUNYUAN
     # hunyuanvideo15_latent_upsampler_1080p.safetensors
     "hunyuanvideo15_latent_upsampler_1080p.safetensors;https://huggingface.co/Comfy-Org/HunyuanVideo_1.5_repackaged/resolve/main/split_files/latent_upscale_models/hunyuanvideo15_latent_upsampler_1080p.safetensors"
 )
