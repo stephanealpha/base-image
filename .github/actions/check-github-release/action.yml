@@ -1,0 +1,156 @@
+# .github/actions/check-github-release/action.yml
+name: Check GitHub Release
+description: Check for new releases and resolve build ref
+
+inputs:
+  repository:
+    description: "GitHub repository (e.g., Comfy-Org/ComfyUI)"
+    required: true
+  age-threshold-seconds:
+    description: "Max age in seconds to consider a release 'new'"
+    required: false
+    default: "86400"
+  github-token:
+    description: "GitHub token for API requests"
+    required: false
+    default: ""
+  trigger:
+    description: "What triggered the workflow (github.event_name)"
+    required: true
+  manual-ref:
+    description: "Ref provided via manual trigger (if any)"
+    required: false
+    default: ""
+  default-ref:
+    description: "Default ref if none specified"
+    required: false
+    default: "master"
+  tag-pattern:
+    description: "Regex to filter release tags (e.g. '^v?[0-9]+\\.[0-9]+\\.[0-9]+$' for stable only). Empty matches all."
+    required: false
+    default: ""
+  resolve-master-to-commit:
+    description: "Whether to resolve master/main to short commit hash"
+    required: false
+    default: "true"
+
+outputs:
+  new-release:
+    description: "Whether a new release was found (always true for manual triggers)"
+    value: ${{ steps.check.outputs.new-release }}
+  resolved-ref:
+    description: "The ref to use for building"
+    value: ${{ steps.resolve.outputs.ref }}
+  release-tag:
+    description: "The release tag (if found)"
+    value: ${{ steps.check.outputs.release-tag }}
+  published-at:
+    description: "When the release was published (ISO 8601)"
+    value: ${{ steps.check.outputs.published-at }}
+  updated-at:
+    description: "When the release was last updated (ISO 8601)"
+    value: ${{ steps.check.outputs.updated-at }}
+
+runs:
+  using: composite
+  steps:
+    - name: Check for new release
+      id: check
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: |
+        # Manual triggers always proceed
+        if [[ "${{ inputs.trigger }}" != "schedule" ]]; then
+          echo "new-release=true" >> $GITHUB_OUTPUT
+          echo "Manual trigger - skipping release check"
+          exit 0
+        fi
+        
+        echo "Checking GitHub for new releases of ${{ inputs.repository }}..."
+        
+        AUTH_HEADER=""
+        if [[ -n "$GH_TOKEN" ]]; then
+          AUTH_HEADER="Authorization: Bearer $GH_TOKEN"
+        fi
+        
+        HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" \
+          -H "Accept: application/vnd.github+json" \
+          ${AUTH_HEADER:+-H "$AUTH_HEADER"} \
+          "https://api.github.com/repos/${{ inputs.repository }}/releases?per_page=10")
+        
+        HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+        BODY=$(echo "$HTTP_RESPONSE" | sed '$d')
+        
+        if [[ "$HTTP_CODE" != "200" ]]; then
+          echo "::warning::GitHub API returned $HTTP_CODE"
+          echo "new-release=false" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        
+        TAG_PATTERN="${{ inputs.tag-pattern }}"
+        if [[ -n "$TAG_PATTERN" ]]; then
+          RELEASE=$(echo "$BODY" | jq --arg pattern "$TAG_PATTERN" '[.[] | select(.draft != true) | select(.prerelease != true) | select(.tag_name | test($pattern))] | sort_by(.updated_at) | reverse | .[0] // empty')
+        else
+          RELEASE=$(echo "$BODY" | jq '[.[] | select(.draft != true) | select(.prerelease != true)] | sort_by(.updated_at) | reverse | .[0] // empty')
+        fi
+        TAG=$(echo "$RELEASE" | jq -r '.tag_name // empty')
+        PUBLISHED_AT=$(echo "$RELEASE" | jq -r '.published_at // empty')
+        UPDATED_AT=$(echo "$RELEASE" | jq -r '.updated_at // empty')
+        
+        if [[ -z "$TAG" || -z "$UPDATED_AT" ]]; then
+          echo "::warning::Could not parse release data"
+          echo "new-release=false" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        
+        echo "release-tag=$TAG" >> $GITHUB_OUTPUT
+        echo "published-at=$PUBLISHED_AT" >> $GITHUB_OUTPUT
+        echo "updated-at=$UPDATED_AT" >> $GITHUB_OUTPUT
+
+        # Calculate age from updated_at — catches releases promoted from prerelease
+        RELEASE_EPOCH=$(date -d "$UPDATED_AT" +%s)
+        NOW_EPOCH=$(date +%s)
+        AGE=$((NOW_EPOCH - RELEASE_EPOCH))
+        AGE_HOURS=$((AGE / 3600))
+        
+        echo "Latest: $TAG (updated $AGE_HOURS hours ago)"
+        
+        if [[ $AGE -lt ${{ inputs.age-threshold-seconds }} ]]; then
+          echo "new-release=true" >> $GITHUB_OUTPUT
+          echo "✓ New release detected"
+        else
+          echo "new-release=false" >> $GITHUB_OUTPUT
+          echo "::notice::No new release in threshold period"
+        fi
+
+    - name: Resolve ref
+      id: resolve
+      shell: bash
+      run: |
+        # Priority: manual input > release tag > default
+        if [[ -n "${{ inputs.manual-ref }}" && "${{ inputs.trigger }}" != "schedule" ]]; then
+          REF="${{ inputs.manual-ref }}"
+          echo "Using manual ref: $REF"
+        elif [[ -n "${{ steps.check.outputs.release-tag }}" && "${{ inputs.trigger }}" == "schedule" ]]; then
+          REF="${{ steps.check.outputs.release-tag }}"
+          echo "Using release tag: $REF"
+        else
+          REF="${{ inputs.default-ref }}"
+          echo "Using default ref: $REF"
+        fi
+        
+        # Optionally resolve master/main to commit hash
+        if [[ "${{ inputs.resolve-master-to-commit }}" == "true" && ("$REF" == "master" || "$REF" == "main") ]]; then
+          echo "Resolving $REF → HEAD commit"
+          COMMIT=$(git ls-remote "https://github.com/${{ inputs.repository }}.git" "refs/heads/$REF" | cut -f1 | cut -c1-7)
+          if [[ -n "$COMMIT" ]]; then
+            REF="$COMMIT"
+            echo "Resolved to: $REF"
+          else
+            echo "::warning::Could not resolve HEAD, using fallback"
+            REF="$(date -u +%Y%m%d-%H%M)"
+          fi
+        fi
+        
+        echo "ref=$REF" >> $GITHUB_OUTPUT
