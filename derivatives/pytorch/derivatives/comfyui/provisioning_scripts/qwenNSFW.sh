@@ -15,61 +15,65 @@ PIP_PACKAGES=(
 DIFFUSION_MODELS=(
 	#########################    WAN 2.2 IMAGE TO VIDEO
     # wan2.2_i2v_high_noise_14B_fp8_scaled
-    #"wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_i2v_low_noise_14B_fp8_scaled
-    #"wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
     #########################    WAN 2.2 TEXT TO VIDEO
     # wan2.2_t2v_high_noise_14B_fp8_scaled
-    #"wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors"
     # wan2.2_t2v_low_noise_14B_fp8_scaled
-    #"wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors"
+    "wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors"
     #########################    FLUX KREA
 	# FP8
     # flux1-krea-dev_fp8_scaled.safetensors
-    "flux1-krea-dev_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
+    #"flux1-krea-dev_fp8_scaled.safetensors;https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
 	# COMPLET
 	# flux1-krea-dev.safetensors
-	"flux1-krea-dev.safetensors;https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
+	#"flux1-krea-dev.safetensors;https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 	#########################    FLUX INPAINT
     # flux1-fill-dev.safetensors
-	"flux1-fill-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/split_files/diffusion_models/flux1-fill-dev.safetensors"
+	#"flux1-fill-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/split_files/diffusion_models/flux1-fill-dev.safetensors"
 	#########################    FLUX DEV
 	# flux1-dev.safetensors
-	"flux1-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors"
+	#"flux1-dev.safetensors;https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev.safetensors"
 )
 
 TEXTENC_MODELS=(
     #########################    WAN
     # umt5_xxl_fp8_e4m3fn_scaled
-	#"umt5_xxl_fp8_e4m3fn_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+	"umt5_xxl_fp8_e4m3fn_scaled.safetensors;https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
     #########################    FLUX
     # clip_l.safetensors
-    "clip_l.safetensors;https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+    #"clip_l.safetensors;https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
     # t5xxl_fp16.safetensors
-    "t5xxl_fp16.safetensors;https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"    
+    #"t5xxl_fp16.safetensors;https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"    
 )
 
 LORA_MODELS=(
 	#########################    WAN 2.2 IMAGE TO VIDEO
     # wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise
-    #"wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
+    "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
     # wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise
-    #"wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+    "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
     #########################    WAN 2.2 TEXT TO VIDEO
     # wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise
-    #"wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
+    "wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
     # wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise
-    #"wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
-
+    "wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+	#########################    WAN 2.2 TEXT TO VIDEO NSFW
+    # Wan2.2-High-MysticXXX-v2.safetensors
+	"Wan2.2-High-MysticXXX-v2.safetensors;https://civitai.com/api/download/models/2285409?type=Model&format=SafeTensor"
+	# Wan2.2-Low-MysticXXX-v2.safetensors
+	"Wan2.2-Low-MysticXXX-v2.safetensors;https://civitai.com/api/download/models/2287911?type=Model&format=SafeTensor"
     )
 
 VAE_MODELS=(
     #########################    WAN 2.2
-	  # wan_2.1_vae
-	  #"wan_2.1_vae.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
+	# wan_2.1_vae
+	"wan_2.1_vae.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
     #########################    FLUX
     # ae.safetensors
-    "ae.safetensors;https://huggingface.co/Comfy-Org/Lumina_Image_2.0_Repackaged/resolve/main/split_files/vae/ae.safetensors"
+    #"ae.safetensors;https://huggingface.co/Comfy-Org/Lumina_Image_2.0_Repackaged/resolve/main/split_files/vae/ae.safetensors"
 )
 
 ESRGAN_MODELS=(
