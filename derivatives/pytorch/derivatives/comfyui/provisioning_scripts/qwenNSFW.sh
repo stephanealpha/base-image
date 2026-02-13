@@ -65,6 +65,9 @@ LORA_MODELS=(
 	"Wan2.2-High-MysticXXX-v2.safetensors;https://civitai.com/api/download/models/2285409?type=Model&format=SafeTensor"
 	# Wan2.2-Low-MysticXXX-v2.safetensors
 	"Wan2.2-Low-MysticXXX-v2.safetensors;https://civitai.com/api/download/models/2287911?type=Model&format=SafeTensor"
+    # Wan2.2-High-Experimental-v2.safetensors
+    "Wan2.2-High-Experimental-v2.safetensors;https://civitai.com/api/download/models/2073605?type=Model&format=SafeTensor"
+    "Wan2.2-Low-Experimental-v2.safetensors;https://civitai.com/api/download/models/2083303?type=Model&format=SafeTensor"
     )
 
 VAE_MODELS=(
