@@ -57,9 +57,9 @@ LORA_MODELS=(
     "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
     #########################    WAN 2.2 TEXT TO VIDEO
     # wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise
-    "wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
+    "wan2.2_t2v_lightx2v_4steps_lora_v1.1_high_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1.1_high_noise.safetensors"
     # wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise
-    "wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+    "wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors;https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/loras/wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors"
 	#########################    WAN 2.2 TEXT TO VIDEO NSFW
     # Wan2.2-High-MysticXXX-v2.safetensors
 	"Wan2.2-High-MysticXXX-v2.safetensors;https://civitai.com/api/download/models/2285409?type=Model&format=SafeTensor"
