@@ -4,7 +4,8 @@ utils=/opt/supervisor-scripts/utils
 . "${utils}/logging.sh"
 . "${utils}/cleanup_generic.sh"
 . "${utils}/environment.sh"
-[[ "${SERVERLESS:-false}" = "false" ]] && . "${utils}/exit_portal.sh" "ollama"
+[[ -f /venv/main/bin/activate ]] && . /venv/main/bin/activate
+. "${utils}/exit_portal.sh" "ollama"
 
 # Wait for provisioning to complete
 

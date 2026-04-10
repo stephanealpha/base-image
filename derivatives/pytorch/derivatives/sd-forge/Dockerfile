@@ -1,4 +1,4 @@
-ARG PYTORCH_BASE=vastai/pytorch:2.9.1-cu128-cuda-12.9-mini-py311
+ARG PYTORCH_BASE=vastai/pytorch:2.9.1-cu128-cuda-12.9-mini-py311-2026-03-26
 
 FROM ${PYTORCH_BASE}
 
@@ -42,6 +42,11 @@ RUN \
     # Download custom models into the build if you want them - None included in default build
     # wget -O /opt/workspace-internal/stable-diffusion-webui-forge/models/Stable-diffusion/model1.safetensors https://url.to.files/model1.safetensors && \
     # wget -O /opt/workspace-internal/stable-diffusion-webui-forge/models/Stable-diffusion/model2.safetensors https://url.to.files/model2.safetensors && \
+    # Pin setuptools<78 for pip build isolation — legacy packages (e.g. CLIP) use
+    # pkg_resources which was removed in setuptools 78+. PIP_CONSTRAINT ensures pip's
+    # isolated build environments also respect this cap.
+    echo 'setuptools<78' > /tmp/pip-constraint.txt && \
+    export PIP_CONSTRAINT=/tmp/pip-constraint.txt && \
     # Quick startup test in CPU mode to ensure requirements ready and startup succeeds
     cd /opt/workspace-internal/stable-diffusion-webui-forge && \
     LD_PRELOAD=libtcmalloc_minimal.so.4 \
@@ -57,3 +62,6 @@ RUN \
     # Test 1: Verify PyTorch version is unaltered
     torch_version_post="$(python -c 'import torch; print (torch.__version__)')" && \
     [[ $torch_version_pre = $torch_version_post ]] || { echo "PyTorch version mismatch (wanted ${torch_version_pre} but got ${torch_version_post})"; exit 1; }
+
+# Defend against environment clashes when syncing to volume
+RUN env-hash > /.env_hash
