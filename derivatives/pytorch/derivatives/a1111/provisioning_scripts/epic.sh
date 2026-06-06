@@ -163,7 +163,7 @@ function provisioning_has_valid_hf_token() {
 
 function provisioning_has_valid_civitai_token() {
     [[ -n "$CIVITAI_TOKEN" ]] || return 1
-    url="https://civitai.com/api/v1/models?hidden=1&limit=1"
+    url="https://civitai.red/api/v1/models?hidden=1&limit=1"
 
     response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
         -H "Authorization: Bearer $CIVITAI_TOKEN" \
