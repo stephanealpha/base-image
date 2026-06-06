@@ -1,4 +1,4 @@
-ARG PYTORCH_BASE=vastai/pytorch:2.10.0-cu128-cuda-12.9-mini-py311-2026-03-26
+ARG PYTORCH_BASE=vastai/pytorch:2.10.0-cu128-cuda-12.9-mini-py311-2026-04-15
 
 FROM ${PYTORCH_BASE}
 
@@ -23,7 +23,8 @@ RUN \
     . /venv/main/bin/activate && \
     . /opt/nvm/nvm.sh && \
     # We have PyTorch pre-installed so we will check at the end of the install that it has not been clobbered
-    torch_version_pre="$(python -c 'import torch; print (torch.__version__)')" && \
+    # Snapshot the base's full torch ecosystem (torch + torchvision + torchaudio + torchcodec).
+    torch_versions_pre="$({ pip list --format=freeze 2>/dev/null | grep -E '^(torch|torchvision|torchaudio|torchcodec)==' || :; } | sort)" && \
     # Clone and install ACE-Step 1.5
     cd /opt/workspace-internal/ && \
     git clone https://github.com/ace-step/ACE-Step-1.5 && \
@@ -32,7 +33,17 @@ RUN \
     # Blackwell (compute >= 12) fix: CUDA graph capture fails in nanovllm
     sed -i 's/enforce_eager_for_vllm = bool(is_rocm or is_jetson)/is_blackwell = False\n            try:\n                cc = torch.cuda.get_device_capability()\n                is_blackwell = cc[0] >= 12\n            except Exception:\n                pass\n            enforce_eager_for_vllm = bool(is_rocm or is_jetson or is_blackwell)/' \
         acestep/llm_inference.py && \
-    UV_PROJECT_ENVIRONMENT=/venv/main uv sync && \
+    # Strip torch ecosystem deps — provided by the base venv
+    sed -i '/^[[:space:]]*"torch[>=<;",]/d; /^[[:space:]]*"torchvision[>=<;",]/d; /^[[:space:]]*"torchaudio[>=<;",]/d; /^[[:space:]]*"torchcodec[>=<;",]/d' pyproject.toml && \
+    # Fail loudly if upstream pyproject formatting changes and the strip misses a dep —
+    # silent passthrough would let uv pip install clobber the base venv's torch stack
+    if grep -qE '^[[:space:]]*"(torch|torchvision|torchaudio|torchcodec)([^A-Za-z0-9_-]|$)' pyproject.toml; then \
+        echo "ERROR: torch ecosystem deps still present in pyproject.toml after strip:" >&2; \
+        grep -nE '^[[:space:]]*"(torch|torchvision|torchaudio|torchcodec)' pyproject.toml >&2; \
+        exit 1; \
+    fi && \
+    uv pip install --no-cache-dir hatchling && \
+    uv pip install --no-cache-dir --no-build-isolation ./acestep/third_parts/nano-vllm . && \
     # UI is not aware of the correct venv path and looks up this dir for python
     ln -s /venv/main .venv && \
     # Clone and install ace-step-ui
@@ -44,10 +55,11 @@ RUN \
     cd server && \
     npm install && \
     cp .env.example .env && \
-    # Verify PyTorch version unchanged
-    torch_version_post="$(python -c 'import torch; print (torch.__version__)')" && \
-    [[ $torch_version_pre = $torch_version_post ]] || \
-        { echo "PyTorch version mismatch (wanted ${torch_version_pre} but got ${torch_version_post})"; exit 1; }
+    # Verify torch ecosystem unchanged. ace-step's pyproject.toml strip
+    # above prevents upstream pins from leaking through; this is the
+    # downstream sanity check that catches any other clobber path.
+    torch_versions_post="$({ pip list --format=freeze 2>/dev/null | grep -E '^(torch|torchvision|torchaudio|torchcodec)==' || :; } | sort)" && \
+    [[ "$torch_versions_pre" = "$torch_versions_post" ]] || { echo "torch ecosystem version drift:"; diff <(echo "$torch_versions_pre") <(echo "$torch_versions_post"); exit 1; }
 
 # Defend against environment clashes when syncing to volume
 RUN \
