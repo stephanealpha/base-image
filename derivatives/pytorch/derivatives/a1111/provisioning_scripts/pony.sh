@@ -18,7 +18,7 @@ PIP_PACKAGES=(
 
 CHECKPOINT_MODELS=(
     # Ultra Realistic
-    "UltraRealisticL.safetensors;https://civitai.red/api/download/models/1992752?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "UltraRealistic.safetensors;https://civitai.red/api/download/models/1992752?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     # Epic Pure Fix
     "RealismStableYogi.safetensors;https://civitai.red/api/download/models/2985392?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     # Realistic Skin XL 
